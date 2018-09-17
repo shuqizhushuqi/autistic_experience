@@ -6,7 +6,12 @@
   <title>Neon Disco</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <iframe width="0" height="0" src="https://www.youtuberepeater.com/watch?v=K2P4Ed6G3gw&name=Sensory+Overload"></iframe>
 
+    <script>
+     var bleep = new Audio();
+     bleep.src = "bleep.mp3";
+    </script>
     <style>
         body a{
           color:green;
@@ -24,6 +29,18 @@
 
         body a:hover{
           opacity: 1;
+        }
+
+        body h4{
+          color:black;
+          font-family: Arial;
+          text-align: center;
+          index:1000;
+          top: 50px;
+          left: 50px;
+          padding: 3px;
+          position: fixed;
+          background-color: white;
         }
 
 
@@ -178,20 +195,20 @@
 </head>
 
 <body>
-  <a href="https://www.google.com/search?rlz=1C5CHFA_enUS807US810&ei=fkmeW6u4Loj5_Aa227mgDA&q=sensory+overload+for+autism&oq=sensory+overload+for+auti&gs_l=psy-ab.1.0.0i22i30l10.177788.181349..183038...1.0..0.61.535.10......0....1..gws-wiz.......0j0i71j0i67.Ww7Zu6trZp4 ">EXIT</a>
-  <div id="box1"><a href="">EXIT</a></div>
-  <div id="box2"><a href="">EXIT</a></div>
-  <div id="box3"><a href="">EXIT</a></div>
-  <div id="box4"><a href="">EXIT</a></div>
-  <div id="box5"><a href="">EXIT</a></div>
-  <div id="box6"><a href="">EXIT</a></div>
-  <div id="box7"><a href="">EXIT</a></div>
-  <div id="box8"><a href="">EXIT</a></div>
+  <h4>CLICK around to escape the fluorescent trap.<br/>You may hit wrong pop-out "EXIT" buttons but try not to give up</h4>
+
+  <a href="https://www.huffingtonpost.com/jared-green/sensory-overload-how-peop_b_7653596.html ">EXIT</a>
+  <div id="box1"><a href="#" onmousedown="bleep.play()">EXIT</a></div>
+  <div id="box2"><a href="#" onmousedown="bleep.play()">EXIT</a></div>
+  <div id="box3"><a href="#" onmousedown="bleep.play()">EXIT</a></div>
+  <div id="box4"><a href="#" onmousedown="bleep.play()">EXIT</a></div>
+  <div id="box5"><a href="#" onmousedown="bleep.play()">EXIT</a></div>
+  <div id="box6"><a href="#" onmousedown="bleep.play()">EXIT</a></div>
+  <div id="box7"><a href="#" onmousedown="bleep.play()">EXIT</a></div>
+  <div id="box8"><a href="#" onmousedown="bleep.play()">EXIT</a></div>
 
 
-
-<!--
-
+  <!-- Vertex Shader -->
 <script id="vertexShader" type="x-shader/x-vertex">
   varying vec2 vUv;
 
@@ -214,17 +231,17 @@
   void main( void ) {
       vec2 uv = (vUv.xy * resolution * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
 
-      uv *= sin(length(uv * fract(time) * 10.0));
+      uv *= sin(length(uv * fract(time) * 5.0));
 
-      float r = 0.15 * abs(sin(time * cos(time * 0.0))) / abs(0.5 - length(uv));
+      float r = 0.15 * abs(sin(time * cos(time * 1.0))) / abs(0.5 - length(uv));
       float g = 0.18 * abs(sin(time * cos(time * 1.0)) + 1.0) / abs(0.46 - length(uv));
-      float b = 0.15 * abs(sin(time * cos(time * 5.0))) / abs(0.54 - length(uv));
+      float b = 0.15 * abs(sin(time * cos(time * 1.0))) / abs(0.54 - length(uv));
 
       gl_FragColor = vec4(vec3(r, g * 0.1, b), 1.0);
   }
 </script>
 
-
+<!-- Fragment Shader -->
 <script id="fragmentShader" type="x-shader/x-fragment">
   varying vec2 vUv;
 
@@ -234,7 +251,7 @@
   uniform vec3 baseColor;
 
   const float PI = 3.14159;
-  const float N = 90.0;
+  const float N = 30.0;
 
   float random(float n) {
       return fract(abs(sin(n * 55.753) * 367.34));
@@ -243,14 +260,14 @@
   void main(){
       vec2 uv = (vUv.xy * resolution * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
 
-      uv *= 2.0;
+      uv *= 8.0;
 
       float brightness = 0.0;
       float speed = time * 1.0;
 
       for (float i = 0.0;  i < N;  i++) {
-         brightness += 0.002 / abs(sin(PI * uv.x) * sin(PI * uv.y) * sin(PI * speed + random(floor(uv.x )) + random(floor(uv.y))));
-     }
+          brightness += 0.002 / abs(sin(PI * uv.x) * sin(PI * uv.y) * sin(PI * speed + random(floor(uv.x )) + random(floor(uv.y))));
+      }
 
       gl_FragColor = vec4(baseColor * brightness, 1.0);
   }
@@ -262,7 +279,7 @@
     <script  src="js/index.js"></script>
 
 
--->
+
 
 </body>
 
